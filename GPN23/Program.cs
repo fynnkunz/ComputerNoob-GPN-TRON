@@ -224,7 +224,8 @@ namespace GPN23
         private void ComputeMove()
         {
             List<LookaheadMove> moves = new List<LookaheadMove>();
-            for (int i = 0; i < 500; i++)
+            Stopwatch s = Stopwatch.StartNew();
+            for (int i = 0; i < 700; i++)
             {
                 List<Player> playerCopy = new List<Player>(players);
                 LookaheadMove m = new LookaheadMove();
@@ -234,15 +235,17 @@ namespace GPN23
                 playerCopy.ForEach(x => x.predictionStartPos = x.positions.Last());
                 for (int t = 0; t < 100 && CheckMove(nextDirection, currentPos, playerCopy); t++)
                 {
-                    /*
-                    foreach (Player p in playerCopy)
+                    if (t < 3)
                     {
-                        if (p.DistanceTo(currentPos) <= 2)
+                        foreach (Player p in playerCopy)
                         {
-                            p.BlockSourrounding();
+                            if (p.DistanceTo(currentPos) <= 2)
+                            {
+                                // Make sure the bot doesn't go into a cell that could be occupied by an opponent next tick
+                                p.BlockSourrounding();
+                            }
                         }
                     }
-                    */
                     currentPos += nextDirection;
                     nextDirection = GetRandomDirection();
                     m.moves++;
@@ -263,6 +266,7 @@ namespace GPN23
             }
             LookaheadMove best = moves.OrderByDescending(x => x.score).First();
             nextMove = best.direction;
+            Console.WriteLine("Computed next move in " + s.ElapsedMilliseconds + " ms");
         }
 
         public Vector2 GetRandomDirection()

@@ -46,16 +46,6 @@ namespace GPN23
                     
                     ProcessMessage(l);
                 }
-                /*
-                using var cancellationTokenSource = new CancellationTokenSource(1000);
-                client = new TcpClient(new TcpClientConfig
-                {
-                    ReceiveBufferSize = 111111111
-                });
-                client.DataReceived += OnDataReceived;
-            
-                client.Connect(host, port);
-                */
             });
             t.Start();
         }
@@ -225,27 +215,20 @@ namespace GPN23
         {
             List<LookaheadMove> moves = new List<LookaheadMove>();
             Stopwatch s = Stopwatch.StartNew();
+            List<Player> playerCopy = new List<Player>(players);
+            playerCopy.ForEach(x =>
+            {
+                x.predictionStartPos = x.positions.Last();
+                x.BlockSourrounding();
+            });
             for (int i = 0; i < 700; i++)
             {
-                List<Player> playerCopy = new List<Player>(players);
                 LookaheadMove m = new LookaheadMove();
                 Vector2 currentPos = GetOwnPosition();
                 Vector2 nextDirection = GetRandomDirection();
                 m.direction = GetDirectionName(nextDirection);
-                playerCopy.ForEach(x => x.predictionStartPos = x.positions.Last());
                 for (int t = 0; t < 100 && CheckMove(nextDirection, currentPos, playerCopy); t++)
                 {
-                    if (t < 3)
-                    {
-                        foreach (Player p in playerCopy)
-                        {
-                            if (p.DistanceTo(currentPos) <= 2)
-                            {
-                                // Make sure the bot doesn't go into a cell that could be occupied by an opponent next tick
-                                p.BlockSourrounding();
-                            }
-                        }
-                    }
                     currentPos += nextDirection;
                     nextDirection = GetRandomDirection();
                     m.moves++;
@@ -255,7 +238,7 @@ namespace GPN23
                 {
                     Player opponent = players.Find(x => !x.dead && x.playerId == playerId);
                     int distanceToOpponent = opponent.DistanceTo(currentPos);
-                    m.score = m.moves / (float)distanceToOpponent;
+                    m.score = m.moves / (float)distanceToOpponent; // flawed calculation. Prefeers getting to opponent instead of suriving. Will go into suicide position
                     m.score = m.moves;
                 }
                 else
@@ -282,21 +265,6 @@ namespace GPN23
             new Vector2(0, -1),
         };
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="direction"></param>
-        /// <returns>Worked</returns>
-        public bool CheckMove(Vector2 direction, Vector2 position)
-        {
-            if (!IsPositionOccupied(position + direction, players))
-            {
-                return true;
-            }
-
-            return false;
-        }
-        
         public bool CheckMove(Vector2 direction, Vector2 position, List<Player> players)
         {
             if (!IsPositionOccupied(position + direction, players))

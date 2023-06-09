@@ -1,0 +1,69 @@
+{
+  "version": 2,
+  "dgSpecHash": "g04/iM1og/H07NBoAmi4INOtwWUEuExtTt1DII12o68sI90OK67WoexJFha0HOEvxDJTBUBV4tBBHZoCZc9S8A==",
+  "success": true,
+  "projectFilePath": "/home/computerelite/rider/GPN23/GPN23/GPN23.csproj",
+  "expectedPackageFiles": [
+    "/home/computerelite/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/nager.datafragmentationhandler/1.0.5/nager.datafragmentationhandler.1.0.5.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/nager.tcpclient/1.1.1/nager.tcpclient.1.1.1.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/reactivesockets/0.2.6/reactivesockets.0.2.6.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/rx-core/2.2.5/rx-core.2.2.5.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/rx-interfaces/2.2.5/rx-interfaces.2.2.5.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/rx-linq/2.2.5/rx-linq.2.2.5.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/rx-main/2.2.5/rx-main.2.2.5.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/rx-platformservices/2.2.5/rx-platformservices.2.2.5.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'ReactiveSockets 0.2.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "ReactiveSockets",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Rx-Core 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Rx-Core",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Rx-Interfaces 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Rx-Interfaces",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Rx-Linq 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Rx-Linq",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Rx-PlatformServices 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Rx-PlatformServices",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/computerelite/rider/GPN23/GPN23/GPN23.csproj": {}
+  },
+  "projects": {
+    "/home/computerelite/rider/GPN23/GPN23/GPN23.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/computerelite/rider/GPN23/GPN23/GPN23.csproj",
+        "projectName": "GPN23",
+        "projectPath": "/home/computerelite/rider/GPN23/GPN23/GPN23.csproj",
+        "packagesPath": "/home/computerelite/.nuget/packages/",
+        "outputPath": "/home/computerelite/rider/GPN23/GPN23/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/computerelite/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Nager.DataFragmentationHandler": {
+              "target": "Package",
+              "version": "[1.0.5, )"
+            },
+            "Nager.TcpClient": {
+              "target": "Package",
+              "version": "[1.1.1, )"
+            },
+            "ReactiveSockets": {
+              "target": "Package",
+              "version": "[0.2.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

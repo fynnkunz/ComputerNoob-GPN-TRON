@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Nager.DataFragmentationHandler" Version="1.0.5" />
+      <PackageReference Include="Nager.TcpClient" Version="1.1.1" />
+      <PackageReference Include="ReactiveSockets" Version="0.2.6" />
+    </ItemGroup>
+
+</Project>

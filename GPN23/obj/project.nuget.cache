@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "g04/iM1og/H07NBoAmi4INOtwWUEuExtTt1DII12o68sI90OK67WoexJFha0HOEvxDJTBUBV4tBBHZoCZc9S8A==",
+  "dgSpecHash": "Hg71j06s+NlYdf0U92Z6yQDbBhNodj2iyYeH3krC/f8SuzHl4Bu1n+Em12bHHfJCpKLZQhevkq0rq0V72ReX/w==",
   "success": true,
   "projectFilePath": "/home/computerelite/rider/GPN23/GPN23/GPN23.csproj",
   "expectedPackageFiles": [
@@ -12,7 +12,10 @@
     "/home/computerelite/.nuget/packages/rx-interfaces/2.2.5/rx-interfaces.2.2.5.nupkg.sha512",
     "/home/computerelite/.nuget/packages/rx-linq/2.2.5/rx-linq.2.2.5.nupkg.sha512",
     "/home/computerelite/.nuget/packages/rx-main/2.2.5/rx-main.2.2.5.nupkg.sha512",
-    "/home/computerelite/.nuget/packages/rx-platformservices/2.2.5/rx-platformservices.2.2.5.nupkg.sha512"
+    "/home/computerelite/.nuget/packages/rx-platformservices/2.2.5/rx-platformservices.2.2.5.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/microsoft.netcore.app.ref/7.0.19/microsoft.netcore.app.ref.7.0.19.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.19/microsoft.aspnetcore.app.ref.7.0.19.nupkg.sha512",
+    "/home/computerelite/.nuget/packages/microsoft.netcore.app.host.linux-x64/7.0.19/microsoft.netcore.app.host.linux-x64.7.0.19.nupkg.sha512"
   ],
   "logs": [
     {

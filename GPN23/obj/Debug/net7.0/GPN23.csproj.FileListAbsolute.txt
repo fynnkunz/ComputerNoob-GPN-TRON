@@ -22,3 +22,4 @@
 /home/computerelite/rider/GPN23/GPN23/bin/Debug/net7.0/Microsoft.Extensions.Logging.Abstractions.dll
 /home/computerelite/rider/GPN23/GPN23/bin/Debug/net7.0/Nager.DataFragmentationHandler.dll
 /home/computerelite/rider/GPN23/GPN23/bin/Debug/net7.0/Nager.TcpClient.dll
+/home/computerelite/rider/GPN23/GPN23/obj/Debug/net7.0/GPN23.sourcelink.json

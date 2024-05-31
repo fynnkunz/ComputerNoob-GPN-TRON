@@ -139,7 +139,7 @@ namespace GPN23
                 case "tick":
                     // Send package
                     if (!isInGame) return;
-                    ShowBoard();
+                    //ShowBoard(board);
                     ComputeMove();
                     Send("move|" + nextMove);
                     break;
@@ -163,7 +163,7 @@ namespace GPN23
                     wins = ParseInt(args[1]);
                     losses = ParseInt(args[2]);
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("I'm a looser D:");
+                    Console.WriteLine("I'm a looser D:   -    Survived " + players.Find(x => x.playerId == playerId).positions.Count + " ticks");
                     break;
             }
         }
@@ -207,7 +207,7 @@ namespace GPN23
             ConsoleColor.DarkYellow,
             ConsoleColor.DarkGray,
         };
-        public void ShowBoard()
+        public void ShowBoard(int[,] board)
         {
             if (gameWidth == 0 || gameHeight == 0) return;
             ConsoleColor lastColor = ConsoleColor.White;
@@ -221,12 +221,14 @@ namespace GPN23
                         Console.Write("  ");
                         continue;
                     }
-                    if (lastColor != colors[p])
+
+                    int colori = p == -2 ? playerId : p;
+                    if (lastColor != colors[colori % colors.Count])
                     {
-                        lastColor = colors[p];
+                        lastColor = colors[colori % colors.Count];
                         Console.ForegroundColor = lastColor;
                     }
-                    Console.Write(p == playerId ? "##" : "██");
+                    Console.Write(p == playerId ? "##" : (p == -2 ? "OO" : "██"));
                     /*
                     if (IsPlayerHead(x, y, p))
                     {
@@ -321,50 +323,69 @@ namespace GPN23
         {
             Send("chat|" + content);
         }
-
+        
         private void ComputeMove()
         {
-            List<LookaheadMove> moves = new List<LookaheadMove>();
+            const int tries = 50000;
+            LookaheadMove[] moves = new LookaheadMove[tries];
             Stopwatch s = Stopwatch.StartNew();
             List<Player> playerCopy = new List<Player>(players);
             int[,] boardCopy = (int[,])board.Clone();
             foreach (Player x in playerCopy)
             {
                 x.predictionStartPos = x.positions.Last();
-                if (x.playerId != playerId)
+                if (x.playerId != playerId && !x.dead)
                 {
                     x.BlockSourrounding(ref boardCopy, this);
                 }
             }
-            for (int i = 0; i < 20000; i++)
+
+            Vector2 ownPos = GetOwnPosition();
+            for (int i = 0; i < tries; i++)
             {
                 LookaheadMove m = new LookaheadMove();
-                Vector2 currentPos = GetOwnPosition();
-                Vector2 nextDirection = GetRandomDirection();
+                m.board = boardCopy;
+                Vector2 currentPos = new Vector2(ownPos.X, ownPos.Y);
+                
+                Vector2 nextDirection = GetRandomValidDirection(currentPos, ref m.board);
                 m.direction = GetDirectionName(nextDirection);
-                for (int t = 0; t < 150 && CheckMove(nextDirection, currentPos, boardCopy); t++)
+                for (int t = 0; t < 100 && CheckMove(nextDirection, currentPos, m.board); t++)
                 {
+                    m.board[(int)currentPos.Y, (int)currentPos.X] = -2;
                     currentPos += nextDirection;
-                    nextDirection = GetRandomDirection();
+                    currentPos = GetVector2InPlayfield(currentPos);
+                    m.board[(int)currentPos.Y, (int)currentPos.X] = -2;
+                    nextDirection = GetRandomValidDirection(currentPos, ref m.board);
                     m.moves++;
                 }
-
-                if (players.Count(x => !x.dead) == 2)
-                {
-                    Player opponent = players.Find(x => !x.dead && x.playerId == playerId);
-                    int distanceToOpponent = opponent.DistanceTo(currentPos);
-                    m.score = m.moves / (float)distanceToOpponent; // flawed calculation. Prefeers getting to opponent instead of suriving. Will go into suicide position
-                    m.score = m.moves;
-                }
-                else
-                {
-                    m.score = m.moves;
-                }
-                moves.Add(m);
+                
+                m.score = m.moves;
+                moves[i] = m;
             }
             LookaheadMove best = moves.OrderByDescending(x => x.score).First();
             nextMove = best.direction;
+            Console.WriteLine("Chose this route (" + best.moves + "):");
+            ShowBoard(best.board);
             Console.WriteLine("Computed next move in " + s.ElapsedMilliseconds + " ms");
+        }
+
+        private Vector2 GetRandomValidDirection(Vector2 currentPos, ref int[,] boardCopy)
+        {
+            Vector2[] valid = new Vector2[4];
+            int added = 0;
+            for (int i = 0; i < directions.Count; i++)
+            {
+                if (CheckMove(directions[i], currentPos, boardCopy))
+                {
+                    valid[added] = directions[i];
+                    added++;
+                }
+            }
+            if(added == 0)
+            {
+                return new Vector2(1, 0);
+            }
+            return valid[Random.Shared.Next(0, added)];
         }
 
         public Vector2 GetRandomDirection()
@@ -441,7 +462,12 @@ namespace GPN23
                     Thread.Sleep(8000);
                 }
             });
-            //chatThread.Start();
+            chatThread.Start();
+            while (true)
+            {
+                string msg = Console.ReadLine();
+                SendMessage(msg);
+            }
             /*
              * Legacy move code
              
@@ -473,6 +499,7 @@ namespace GPN23
         public string direction;
         public int moves = 0;
         public float score = 0;
+        public int[,] board;
     }
 
     internal class Player
